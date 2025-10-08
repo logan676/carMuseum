@@ -1,6 +1,13 @@
 import { StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import type { Dealership } from "@/data/mockData";
+
+interface Dealership {
+  id: string;
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+}
 
 interface MapComponentProps {
   dealerships: Dealership[];

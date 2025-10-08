@@ -1,6 +1,13 @@
 import { Platform, StyleSheet, Text, View, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import type { Dealership } from "@/data/mockData";
+
+interface Dealership {
+  id: string;
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+}
 
 interface MapComponentProps {
   dealerships: Dealership[];

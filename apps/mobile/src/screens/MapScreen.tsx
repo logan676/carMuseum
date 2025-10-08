@@ -6,7 +6,24 @@ import { ScreenContainer } from "@/components/ScreenContainer";
 import { SearchBar } from "@/components/SearchBar";
 import { MapComponent } from "@/components/MapComponent";
 import { useTheme } from "@/hooks/useTheme";
-import { dealerships } from "@/data/mockData";
+
+// Mock dealerships data for now
+const dealerships = [
+  {
+    id: "1",
+    name: "AutoVerse Downtown",
+    address: "123 Main St, San Francisco, CA 94102",
+    latitude: 37.78,
+    longitude: -122.43,
+  },
+  {
+    id: "2",
+    name: "AutoVerse Marina",
+    address: "456 Marina Blvd, San Francisco, CA 94123",
+    latitude: 37.8,
+    longitude: -122.45,
+  },
+];
 
 export const MapScreen = () => {
   const { colors, spacing, radii } = useTheme();
@@ -68,35 +85,27 @@ export const MapScreen = () => {
             { backgroundColor: colors.background, padding: spacing.md },
           ]}
         >
-          {primaryDealership ? (
-            <>
-              <Text style={[styles.bottomTitle, { color: colors.text }]}>
-                {primaryDealership.name}
-              </Text>
-              <Text
-                style={[styles.bottomSubtitle, { color: colors.textSecondary }]}
-              >
-                {primaryDealership.address}
-              </Text>
-              <View style={styles.bottomActions}>
-                <View
-                  style={[
-                    styles.actionIcon,
-                    { backgroundColor: colors.primaryMuted },
-                  ]}
-                >
-                  <Ionicons name="navigate" size={18} color={colors.text} />
-                </View>
-                <Text style={[styles.actionLabel, { color: colors.text }]}>
-                  Directions
-                </Text>
-              </View>
-            </>
-          ) : (
-            <Text style={[styles.bottomSubtitle, { color: colors.textSecondary }]}>
-              No dealerships available right now.
+          <Text style={[styles.bottomTitle, { color: colors.text }]}>
+            {primaryDealership.name}
+          </Text>
+          <Text
+            style={[styles.bottomSubtitle, { color: colors.textSecondary }]}
+          >
+            {primaryDealership.address}
+          </Text>
+          <View style={styles.bottomActions}>
+            <View
+              style={[
+                styles.actionIcon,
+                { backgroundColor: colors.primaryMuted },
+              ]}
+            >
+              <Ionicons name="navigate" size={18} color={colors.text} />
+            </View>
+            <Text style={[styles.actionLabel, { color: colors.text }]}>
+              Directions
             </Text>
-          )}
+          </View>
         </View>
       </View>
     </ScreenContainer>
