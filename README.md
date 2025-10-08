@@ -10,8 +10,10 @@ A mobile-first React Native (Expo) application paired with a lightweight Node.js
 - **Dealership map** powered by `react-native-maps` with quick access overlay.
 - **Settings** screen segmented by account, preferences, and support rows.
 - **Node API** surfaces the same curated content for use by external clients.
+- **Angular web front end** (WIP) for desktop and responsive browser access.
 
 ## Tech Stack
+- Web: Angular 18 (standalone components, Karma/Jasmine setup).
 - Mobile: Expo (React Native + TypeScript), React Navigation, React Native Maps.
 - API: Node.js (Express + TypeScript), Vitest + Supertest for tests.
 - Tooling: npm workspaces, shared TypeScript models, GitHub Actions CI, Vercel serverless configuration.
@@ -19,6 +21,7 @@ A mobile-first React Native (Expo) application paired with a lightweight Node.js
 ## Repository Structure
 ```
 apps/
+  web/      # Angular web front end (ng serve/ng build)
   mobile/   # Expo project (screens, navigation, theming, assets)
   server/   # Express API + vitest tests and Vercel handler
 packages/
@@ -35,6 +38,9 @@ npm run dev:mobile
 
 # start the Node API with hot reload
 npm run dev:api
+
+# run the Angular web app
+npm run dev:web
 ```
 
 Expo will display a QR code for Expo Go or simulator usage. The API defaults to `http://localhost:4000` with a `/health` check for diagnostics.

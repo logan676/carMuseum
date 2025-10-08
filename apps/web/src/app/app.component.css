@@ -1,0 +1,132 @@
+:host {
+  display: block;
+  color: #f5f7f9;
+}
+
+.landing {
+  min-height: 100vh;
+  padding: 4rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 620px;
+}
+
+.eyebrow {
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6bd4ff;
+  margin: 0;
+}
+
+.headline {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: 1.05;
+  margin: 0;
+  color: #ffffff;
+}
+
+.lede {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin: 0;
+  color: #d7dde5;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.action[disabled],
+.action[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+.action.primary {
+  background: linear-gradient(135deg, #ff005a, #ff7e47);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(255, 0, 90, 0.2);
+}
+
+.action.secondary {
+  background: rgba(255, 255, 255, 0.04);
+  color: #6bd4ff;
+  border-color: rgba(107, 212, 255, 0.3);
+}
+
+.action:not([disabled]):not([aria-disabled='true']):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+.feature-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.feature-card {
+  background: rgba(12, 18, 28, 0.8);
+  border: 1px solid rgba(107, 212, 255, 0.1);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.25);
+}
+
+.feature-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.feature-card p {
+  margin: 0;
+  color: #c3c9d4;
+  line-height: 1.5;
+}
+
+.feature-card code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Menlo, monospace;
+  font-size: 0.95em;
+  color: #6bd4ff;
+}
+
+@media (max-width: 640px) {
+  .landing {
+    padding-top: 3.5rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action {
+    width: 100%;
+  }
+}

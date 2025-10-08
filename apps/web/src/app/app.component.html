@@ -1,0 +1,48 @@
+<main class="landing">
+  <section class="hero">
+    <p class="eyebrow">AutoVerse</p>
+    <h1 class="headline">Car culture, curated for the web.</h1>
+    <p class="lede">
+      The Angular companion to our Expo experience delivers timelines, news, and garage data with first-class desktop support.
+    </p>
+    <div class="actions">
+      <button class="action primary" type="button" disabled aria-disabled="true">
+        Launch Web Preview (coming soon)
+      </button>
+      <a
+        class="action secondary"
+        href="http://localhost:4000/api/summary"
+        target="_blank"
+        rel="noreferrer"
+      >
+        View API snapshot
+      </a>
+    </div>
+  </section>
+
+  <section class="feature-grid" aria-label="Initial web roadmap">
+    <article class="feature-card">
+      <h2>Responsive dashboard</h2>
+      <p>
+        Recreate the hero news rail, quick actions, and model spotlights in a
+        desktop-friendly layout.
+      </p>
+    </article>
+    <article class="feature-card">
+      <h2>Shared data contracts</h2>
+      <p>
+        Reuse definitions from <code>packages/shared</code> to keep web, mobile,
+        and API views aligned.
+      </p>
+    </article>
+    <article class="feature-card">
+      <h2>Router-first navigation</h2>
+      <p>
+        Map encyclopedia, news, and garage flows to Angular routes for
+        bookmarkable deep links.
+      </p>
+    </article>
+  </section>
+</main>
+
+<router-outlet />

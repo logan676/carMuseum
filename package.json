@@ -2,10 +2,12 @@
   "name": "autoverse",
   "version": "0.1.0",
   "private": true,
-  "workspaces": ["apps/mobile", "apps/server", "packages/shared"],
+  "workspaces": ["apps/mobile", "apps/server", "apps/web", "packages/shared"],
   "scripts": {
     "dev:mobile": "npm run start --prefix apps/mobile",
     "dev:api": "npm run dev --prefix apps/server",
+    "dev:web": "npm run start --prefix apps/web",
+    "build:web": "npm run build --prefix apps/web",
     "build:api": "npm run build --prefix apps/server",
     "test": "npm run test:mobile && npm run test:api",
     "test:mobile": "npm run test --prefix apps/mobile",
