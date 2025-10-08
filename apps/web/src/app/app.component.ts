@@ -21,7 +21,8 @@ export class AppComponent {
   readonly defaultMatch = { exact: false };
 
   readonly navItems: NavItem[] = [
-    { label: 'Dashboard', commands: ['/'], exact: true },
+    { label: 'Home', commands: ['/'], exact: true },
+    { label: 'Dashboard', commands: ['/dashboard'] },
     { label: 'News', commands: ['/news'] },
     { label: 'Encyclopedia', commands: ['/encyclopedia'] },
     { label: 'My Garage', commands: ['/garage'] },

@@ -40,6 +40,8 @@ npm run dev:mobile
 npm run dev:api
 
 # run the Angular web app
+cd autoVerse/apps/mobile && npm run start -- --web --clear
+# not this one
 npm run dev:web
 ```
 

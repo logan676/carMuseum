@@ -1,0 +1,36 @@
+<section class="home">
+  <header class="home__header">
+    <div>
+      <p class="eyebrow">Welcome to</p>
+      <h1 class="home__title">Brand Car Museum</h1>
+      <p class="home__subtitle">Explore legendary marques, timeless designs, and modern icons.</p>
+    </div>
+  </header>
+
+  <section class="banner">
+    <div class="banner__track">
+      @for (b of banners; track b.src) {
+        <img class="banner__image" [src]="b.src" [alt]="b.alt" />
+      }
+    </div>
+    <div class="banner__gradient" aria-hidden="true"></div>
+  </section>
+
+  <section class="section">
+    <div class="section__header">
+      <h2>Brand Museum</h2>
+      <p class="section__subhead">A curated gallery of automotive brands</p>
+    </div>
+
+    <div class="brand-grid">
+      @for (brand of brands; track brand.id) {
+        <article class="brand-card" role="group" [attr.aria-label]="brand.name">
+          <img class="brand-card__image" [src]="brand.image" [alt]="brand.name" />
+          <div class="brand-card__body">
+            <h3 class="brand-card__title">{{ brand.name }}</h3>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</section>
