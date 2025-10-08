@@ -15,17 +15,16 @@ export class HomeComponent {
 
   readonly banners: { src: string; alt: string }[] = [
     {
-      src: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Classic convertible in museum light',
+      src: '/images/car-mezuem-banner-1.svg',
+      alt: 'Car Mezuem kinetic light tunnel installation',
     },
     {
-      src: 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Luxury sedan front fascia',
+      src: '/images/car-mezuem-banner-2.svg',
+      alt: 'Car Mezuem night showcase silhouettes',
     },
     {
-      src: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Iconic sports car silhouette',
+      src: '/images/car-mezuem-banner-3.svg',
+      alt: 'Car Mezuem gallery geometry backdrop',
     },
   ];
 }
-
