@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 interface NavItem {
   readonly label: string;
-  readonly path: string;
+  readonly commands: string[];
   readonly exact?: boolean;
 }
 
@@ -21,12 +21,12 @@ export class AppComponent {
   readonly defaultMatch = { exact: false };
 
   readonly navItems: NavItem[] = [
-    { label: 'Dashboard', path: '/', exact: true },
-    { label: 'News', path: '/news' },
-    { label: 'Encyclopedia', path: '/encyclopedia' },
-    { label: 'My Garage', path: '/garage' },
-    { label: 'Dealerships', path: '/dealerships' },
-    { label: 'Settings', path: '/settings' },
+    { label: 'Dashboard', commands: ['/'], exact: true },
+    { label: 'News', commands: ['/news'] },
+    { label: 'Encyclopedia', commands: ['/encyclopedia'] },
+    { label: 'My Garage', commands: ['/garage'] },
+    { label: 'Dealerships', commands: ['/dealerships'] },
+    { label: 'Settings', commands: ['/settings'] },
   ];
 
   readonly externalLinks = [

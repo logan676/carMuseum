@@ -5,10 +5,10 @@
       <span class="brand__name">AutoVerse</span>
     </div>
     <nav class="topbar__nav" aria-label="Primary navigation">
-      @for (item of navItems; track item.path) {
+      @for (item of navItems; track item.label) {
         <a
           class="nav-link"
-          [routerLink]="item.path"
+          [routerLink]="item.commands"
           routerLinkActive="nav-link--active"
           [routerLinkActiveOptions]="item.exact ? exactMatch : defaultMatch"
         >
