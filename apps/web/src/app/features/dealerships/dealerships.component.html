@@ -1,0 +1,26 @@
+<section class="dealerships">
+  <header class="dealerships__header">
+    <div>
+      <p class="eyebrow">Find dealerships</p>
+      <h1>Curated map</h1>
+      <p class="lede">Plan your next visit with locations spanning performance, classic, and EV specialists.</p>
+    </div>
+  </header>
+
+  <div class="map-hint" role="img" aria-label="Map preview placeholder">
+    <p>Interactive map coming soon.</p>
+  </div>
+
+  <div class="dealership-grid">
+    @for (dealer of dealerships; track dealer.id) {
+      <article class="dealership-card">
+        <img [src]="dealer.image" [alt]="dealer.name" />
+        <div>
+          <h2>{{ dealer.name }}</h2>
+          <p>{{ dealer.address }}</p>
+          <span class="coords">{{ dealer.latitude }}, {{ dealer.longitude }}</span>
+        </div>
+      </article>
+    }
+  </div>
+</section>

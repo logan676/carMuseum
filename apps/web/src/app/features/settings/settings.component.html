@@ -1,0 +1,26 @@
+<section class="settings">
+  <header>
+    <p class="eyebrow">Settings</p>
+    <h1>Control center</h1>
+    <p class="lede">Manage account, preferences, and support touchpoints.</p>
+  </header>
+
+  <div class="settings__sections">
+    @for (section of sections; track section.title) {
+      <section class="settings__section">
+        <h2>{{ section.title }}</h2>
+        <div class="settings__items">
+          @for (item of section.items; track item.title) {
+            <article class="settings-item">
+              <span class="settings-item__icon">{{ item.icon }}</span>
+              <div>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+  </div>
+</section>

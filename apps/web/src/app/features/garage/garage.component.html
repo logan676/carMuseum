@@ -1,0 +1,24 @@
+<section class="garage">
+  <header class="garage__header">
+    <div>
+      <p class="eyebrow">My Garage</p>
+      <h1>Saved Vehicles</h1>
+      <p class="lede">Track current builds and dream additions in one curated list.</p>
+    </div>
+    <button type="button" class="add-button" disabled aria-disabled="true">
+      Add vehicle (coming soon)
+    </button>
+  </header>
+
+  <div class="vehicle-grid">
+    @for (vehicle of vehicles; track vehicle.id) {
+      <article class="vehicle-card">
+        <img [src]="vehicle.image" [alt]="vehicle.name" />
+        <div>
+          <h2>{{ vehicle.name }}</h2>
+          <span>{{ vehicle.year }}</span>
+        </div>
+      </article>
+    }
+  </div>
+</section>

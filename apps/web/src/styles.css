@@ -21,3 +21,18 @@ body {
 app-root {
   flex: 1;
 }
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(107, 212, 255, 0.8);
+  margin: 0 0 0.35rem;
+}
+
+.lede {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  color: rgba(201, 213, 229, 0.82);
+}

@@ -1,48 +1,31 @@
-<main class="landing">
-  <section class="hero">
-    <p class="eyebrow">AutoVerse</p>
-    <h1 class="headline">Car culture, curated for the web.</h1>
-    <p class="lede">
-      The Angular companion to our Expo experience delivers timelines, news, and garage data with first-class desktop support.
-    </p>
-    <div class="actions">
-      <button class="action primary" type="button" disabled aria-disabled="true">
-        Launch Web Preview (coming soon)
-      </button>
-      <a
-        class="action secondary"
-        href="http://localhost:4000/api/summary"
-        target="_blank"
-        rel="noreferrer"
-      >
-        View API snapshot
-      </a>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand__glyph" aria-hidden="true"></span>
+      <span class="brand__name">AutoVerse</span>
     </div>
-  </section>
+    <nav class="topbar__nav" aria-label="Primary navigation">
+      @for (item of navItems; track item.path) {
+        <a
+          class="nav-link"
+          [routerLink]="item.path"
+          routerLinkActive="nav-link--active"
+          [routerLinkActiveOptions]="item.exact ? exactMatch : defaultMatch"
+        >
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+    <div class="topbar__actions">
+      @for (link of externalLinks; track link.href) {
+        <a class="topbar__action" [href]="link.href" target="_blank" rel="noreferrer">
+          {{ link.label }}
+        </a>
+      }
+    </div>
+  </header>
 
-  <section class="feature-grid" aria-label="Initial web roadmap">
-    <article class="feature-card">
-      <h2>Responsive dashboard</h2>
-      <p>
-        Recreate the hero news rail, quick actions, and model spotlights in a
-        desktop-friendly layout.
-      </p>
-    </article>
-    <article class="feature-card">
-      <h2>Shared data contracts</h2>
-      <p>
-        Reuse definitions from <code>packages/shared</code> to keep web, mobile,
-        and API views aligned.
-      </p>
-    </article>
-    <article class="feature-card">
-      <h2>Router-first navigation</h2>
-      <p>
-        Map encyclopedia, news, and garage flows to Angular routes for
-        bookmarkable deep links.
-      </p>
-    </article>
-  </section>
-</main>
-
-<router-outlet />
+  <main class="app-main">
+    <router-outlet />
+  </main>
+</div>

@@ -3,130 +3,134 @@
   color: #f5f7f9;
 }
 
-.landing {
+.app-shell {
   min-height: 100vh;
-  padding: 4rem 1.5rem 3rem;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  max-width: 1100px;
-  margin: 0 auto;
 }
 
-.hero {
+.topbar {
   display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  max-width: 620px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(18px);
+  background: linear-gradient(180deg, rgba(6, 9, 20, 0.92) 0%, rgba(6, 9, 20, 0.7) 100%);
+  border-bottom: 1px solid rgba(107, 212, 255, 0.08);
 }
 
-.eyebrow {
-  font-size: 0.875rem;
-  letter-spacing: 0.2em;
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6bd4ff;
-  margin: 0;
 }
 
-.headline {
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  line-height: 1.05;
-  margin: 0;
+.brand__glyph {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff005a, #ff7e47);
+  box-shadow: 0 0 16px rgba(255, 0, 90, 0.6);
+}
+
+.brand__name {
+  font-size: 0.95rem;
+}
+
+.topbar__nav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: rgba(223, 231, 245, 0.78);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  border-color: rgba(107, 212, 255, 0.3);
   color: #ffffff;
 }
 
-.lede {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  margin: 0;
-  color: #d7dde5;
+.nav-link--active {
+  background: rgba(107, 212, 255, 0.16);
+  color: #ffffff;
+  border-color: rgba(107, 212, 255, 0.35);
+  box-shadow: 0 12px 24px rgba(12, 54, 89, 0.25);
 }
 
-.actions {
+.topbar__actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
+  align-items: center;
 }
 
-.action {
+.topbar__action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.85rem 1.75rem;
+  padding: 0.55rem 1.2rem;
   border-radius: 999px;
-  font-weight: 600;
+  border: 1px solid rgba(107, 212, 255, 0.24);
+  color: #6bd4ff;
   text-decoration: none;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.action[disabled],
-.action[aria-disabled='true'] {
-  cursor: not-allowed;
+.topbar__action:hover {
+  background: rgba(107, 212, 255, 0.12);
+  box-shadow: 0 12px 20px rgba(12, 54, 89, 0.25);
 }
 
-.action.primary {
-  background: linear-gradient(135deg, #ff005a, #ff7e47);
-  color: #ffffff;
-  box-shadow: 0 12px 24px rgba(255, 0, 90, 0.2);
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 3rem;
+  display: flex;
 }
 
-.action.secondary {
-  background: rgba(255, 255, 255, 0.04);
-  color: #6bd4ff;
-  border-color: rgba(107, 212, 255, 0.3);
+.app-main > * {
+  flex: 1;
 }
 
-.action:not([disabled]):not([aria-disabled='true']):hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
-}
+@media (max-width: 960px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
 
-.feature-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
+  .topbar__nav {
+    width: 100%;
+    flex-wrap: wrap;
+  }
 
-.feature-card {
-  background: rgba(12, 18, 28, 0.8);
-  border: 1px solid rgba(107, 212, 255, 0.1);
-  border-radius: 1.25rem;
-  padding: 1.75rem;
-  backdrop-filter: blur(24px);
-  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.25);
-}
+  .topbar__actions {
+    align-self: flex-start;
+  }
 
-.feature-card h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.25rem;
-  color: #ffffff;
-}
-
-.feature-card p {
-  margin: 0;
-  color: #c3c9d4;
-  line-height: 1.5;
-}
-
-.feature-card code {
-  font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Menlo, monospace;
-  font-size: 0.95em;
-  color: #6bd4ff;
+  .app-main {
+    padding: 2.25rem 1.5rem 3rem;
+  }
 }
 
 @media (max-width: 640px) {
-  .landing {
-    padding-top: 3.5rem;
-  }
-
-  .actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .action {
-    width: 100%;
+  .app-main {
+    padding: 2rem 1.25rem 2.75rem;
   }
 }

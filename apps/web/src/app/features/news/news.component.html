@@ -1,0 +1,36 @@
+<section class="news">
+  <header class="news__header">
+    <div>
+      <p class="eyebrow">Explore</p>
+      <h1>News</h1>
+      <p class="lede">Dive into industry updates, reviews, and electric breakthroughs.</p>
+    </div>
+  </header>
+
+  <nav class="news__filters" aria-label="News categories">
+    @for (category of categories; track category) {
+      <button
+        type="button"
+        class="filter"
+        [class.filter--active]="category === selectedCategory()"
+        (click)="onCategoryChange(category)"
+      >
+        {{ category }}
+      </button>
+    }
+  </nav>
+
+  <div class="articles">
+    @for (article of filteredArticles(); track article.id) {
+      <article class="article-card">
+        <img [src]="article.image" [alt]="article.title" />
+        <div class="article-card__body">
+          <span class="pill pill--subtle">{{ article.category }}</span>
+          <h2>{{ article.title }}</h2>
+          <p>{{ article.summary }}</p>
+          <span class="article-card__meta">{{ article.publishedAt }}</span>
+        </div>
+      </article>
+    }
+  </div>
+</section>
