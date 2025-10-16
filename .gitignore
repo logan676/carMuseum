@@ -24,3 +24,11 @@ coverage/
 .env
 .env.*
 .vercel
+
+# AWS
+*.csv
+*_credentials.csv
+*_accessKeys.csv
+lambda-function.zip
+*.pem
+.aws/

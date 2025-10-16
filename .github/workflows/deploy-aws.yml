@@ -1,0 +1,55 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/server/**'
+      - 'packages/**'
+      - 'deploy-api-only.sh'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Verify AWS credentials
+        run: aws sts get-caller-identity
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy API to AWS Lambda
+        run: ./deploy-api-only.sh
+
+      - name: Test deployed API
+        run: |
+          echo "Testing health endpoint..."
+          curl -f https://7pno67yyze.execute-api.us-east-1.amazonaws.com/health || exit 1
+          echo "Health check passed!"
+
+          echo "Testing news endpoint..."
+          curl -f https://7pno67yyze.execute-api.us-east-1.amazonaws.com/api/news || exit 1
+          echo "News endpoint works!"
+
+      - name: Deployment summary
+        run: |
+          echo "✅ Deployment successful!"
+          echo "API Endpoint: https://7pno67yyze.execute-api.us-east-1.amazonaws.com"
+          echo "Deployed from commit: ${{ github.sha }}"
