@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ScreenContainer } from '@/components/ScreenContainer';
 import { SearchBar } from '@/components/SearchBar';
 import { SectionHeader } from '@/components/SectionHeader';
@@ -7,26 +7,33 @@ import { TimelineCard } from '@/components/TimelineCard';
 import { RestorationCard } from '@/components/RestorationCard';
 import { BrandAvatar } from '@/components/BrandAvatar';
 import { ModelCard } from '@/components/ModelCard';
-import {
-  brands,
-  encyclopediaModels,
-  restorationProjects,
-  timelineEntries,
-} from '@/data/mockData';
+import { useModels, useBrands, useProjects } from '@/hooks/useApiData';
 import { useTheme } from '@/hooks/useTheme';
 
 export const EncyclopediaScreen = () => {
   const { colors, spacing } = useTheme();
   const [search, setSearch] = useState('');
 
+  // Fetch data from API
+  const { data: modelsData, loading: modelsLoading } = useModels();
+  const { data: brandsData, loading: brandsLoading } = useBrands();
+  const { data: projectsData, loading: projectsLoading } = useProjects();
+
+  const encyclopediaModels = modelsData?.encyclopedia || [];
+  const brands = brandsData?.data || [];
+  const restorationProjects = projectsData?.data || [];
+  const timelineEntries = projectsData?.timeline || [];
+
   const filteredModels = useMemo(() => {
     if (!search) {
       return encyclopediaModels;
     }
-    return encyclopediaModels.filter((model) =>
+    return encyclopediaModels.filter((model: any) =>
       `${model.name} ${model.description}`.toLowerCase().includes(search.toLowerCase()),
     );
-  }, [search]);
+  }, [search, encyclopediaModels]);
+
+  const isLoading = modelsLoading || brandsLoading || projectsLoading;
 
   return (
     <ScreenContainer>
@@ -44,6 +51,18 @@ export const EncyclopediaScreen = () => {
             placeholder="Search brands or models"
             onChangeText={setSearch}
           />
+
+          {isLoading && (
+            <View style={{ alignItems: 'center', paddingVertical: 40 }}>
+              <ActivityIndicator size="large" color={colors.accent} />
+              <Text style={{ color: colors.textSecondary, marginTop: spacing.md }}>
+                Loading encyclopedia...
+              </Text>
+            </View>
+          )}
+
+          {!isLoading && (
+            <>
 
           <View>
             <SectionHeader title="Timeline" actionLabel="View all" />
@@ -85,6 +104,8 @@ export const EncyclopediaScreen = () => {
               </Text>
             ) : null}
           </View>
+            </>
+          )}
         </View>
       </ScrollView>
     </ScreenContainer>

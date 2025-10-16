@@ -1,14 +1,16 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Image } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ScreenContainer } from '@/components/ScreenContainer';
 import { VehicleCard } from '@/components/VehicleCard';
-import { garageVehicles } from '@/data/mockData';
+import { useGarage } from '@/hooks/useApiData';
 import { useTheme } from '@/hooks/useTheme';
-import { Pressable } from 'react-native';
 
 export const MyGarageScreen = () => {
   const { colors, spacing, radii } = useTheme();
+
+  // Fetch garage data from API
+  const { data, loading } = useGarage();
+  const garageVehicles = data?.vehicles || [];
 
   return (
     <ScreenContainer>
@@ -40,11 +42,18 @@ export const MyGarageScreen = () => {
 
         <View style={{ marginTop: spacing.lg }}>
           <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>My Vehicles</Text>
-          <View style={{ marginTop: spacing.md }}>
-            {garageVehicles.map((vehicle) => (
-              <VehicleCard key={vehicle.id} vehicle={vehicle} />
-            ))}
-          </View>
+          {loading && (
+            <View style={{ alignItems: 'center', paddingVertical: 40 }}>
+              <ActivityIndicator size="large" color={colors.accent} />
+            </View>
+          )}
+          {!loading && (
+            <View style={{ marginTop: spacing.md }}>
+              {garageVehicles.map((vehicle) => (
+                <VehicleCard key={vehicle.id} vehicle={vehicle} />
+              ))}
+            </View>
+          )}
         </View>
       </ScrollView>
     </ScreenContainer>

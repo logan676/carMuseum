@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,7 +8,8 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { NewsCard } from '@/components/NewsCard';
 import { ModelCard } from '@/components/ModelCard';
 import { QuickLinkCard } from '@/components/QuickLinkCard';
-import { quickLinks, featuredModels, newsArticles } from '@/data/mockData';
+import { quickLinks } from '@/data/mockData';
+import { useNews, useModels } from '@/hooks/useApiData';
 import { useTheme } from '@/hooks/useTheme';
 import { RootStackParamList } from '@/navigation/types';
 
@@ -16,7 +17,13 @@ export const DashboardScreen = () => {
   const { colors, spacing, radii, typography } = useTheme();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const popularArticle = useMemo(() => newsArticles[0], []);
+  // Fetch data from API
+  const { data: newsData, loading: newsLoading, error: newsError } = useNews();
+  const { data: modelsData, loading: modelsLoading, error: modelsError } = useModels();
+
+  const newsArticles = newsData?.data || [];
+  const featuredModels = modelsData?.featured || [];
+  const popularArticle = useMemo(() => newsArticles[0], [newsArticles]);
 
   const handleQuickLinkPress = useCallback(
     (route: string) => {
@@ -33,12 +40,36 @@ export const DashboardScreen = () => {
     navigation.getParent()?.navigate('Settings' as never);
   }, [navigation]);
 
+  // Show loading state
+  const isLoading = newsLoading || modelsLoading;
+  const hasError = newsError || modelsError;
+
   return (
     <ScreenContainer>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: spacing.xl }}
       >
+        {isLoading && (
+          <View style={{ alignItems: 'center', justifyContent: 'center', paddingVertical: 40 }}>
+            <ActivityIndicator size="large" color={colors.accent} />
+            <Text style={{ color: colors.textSecondary, marginTop: spacing.md }}>
+              Loading dashboard...
+            </Text>
+          </View>
+        )}
+
+        {hasError && (
+          <View style={{ alignItems: 'center', justifyContent: 'center', paddingVertical: 40 }}>
+            <Ionicons name="alert-circle-outline" size={48} color={colors.error || '#ff4444'} />
+            <Text style={{ color: colors.textSecondary, marginTop: spacing.md, textAlign: 'center' }}>
+              Failed to load data. Please check your connection.
+            </Text>
+          </View>
+        )}
+
+        {!isLoading && !hasError && (
+          <>
         <View style={[styles.headerRow, { marginBottom: spacing.lg }]}>
           <View>
             <Text style={[styles.caption, { color: colors.textSecondary }]}>Welcome to</Text>
@@ -99,6 +130,8 @@ export const DashboardScreen = () => {
             <NewsCard key={article.id} article={article} compact />
           ))}
         </View>
+          </>
+        )}
       </ScrollView>
     </ScreenContainer>
   );

@@ -1,34 +1,21 @@
 import { useMemo, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { SearchBar } from "@/components/SearchBar";
 import { MapComponent } from "@/components/MapComponent";
+import { useDealerships } from "@/hooks/useApiData";
 import { useTheme } from "@/hooks/useTheme";
-
-// Mock dealerships data for now
-const dealerships = [
-  {
-    id: "1",
-    name: "AutoVerse Downtown",
-    address: "123 Main St, San Francisco, CA 94102",
-    latitude: 37.78,
-    longitude: -122.43,
-  },
-  {
-    id: "2",
-    name: "AutoVerse Marina",
-    address: "456 Marina Blvd, San Francisco, CA 94123",
-    latitude: 37.8,
-    longitude: -122.45,
-  },
-];
 
 export const MapScreen = () => {
   const { colors, spacing, radii } = useTheme();
   const [query, setQuery] = useState("");
   const navigation = useNavigation();
+
+  // Fetch dealerships from API
+  const { data, loading } = useDealerships();
+  const dealerships = data?.data || [];
 
   const region = useMemo(
     () => ({
@@ -41,6 +28,19 @@ export const MapScreen = () => {
   );
 
   const primaryDealership = dealerships[0];
+
+  if (loading) {
+    return (
+      <ScreenContainer>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color={colors.accent} />
+          <Text style={{ color: colors.textSecondary, marginTop: spacing.md }}>
+            Loading dealerships...
+          </Text>
+        </View>
+      </ScreenContainer>
+    );
+  }
 
   return (
     <ScreenContainer noPadding>
